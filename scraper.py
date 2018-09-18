@@ -1,6 +1,7 @@
 # Surrender Monkeys Inc.
 # 69/69/80085
 # Written by The Ass Blaster 6900
+# God Bless America
 
 from lxml import html
 import requests
