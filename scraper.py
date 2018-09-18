@@ -1,3 +1,7 @@
+# Surrender Monkeys Inc.
+# 69/69/80085
+# Written by The Ass Blaster 6900
+
 from lxml import html
 import requests
 from pprint import pprint
@@ -21,15 +25,26 @@ def parse():
             headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) '
                              'Chrome/42.0.2311.90 Safari/537.36'}
             print("Fetching %s"%(url))
+            # establishing what format your response will be in
             response = requests.get(url, headers=headers, verify=False)
             print("Scraping the Page" + " " + url)
+            # declaring the parser text
+            # http://saxon.sourceforge.net/saxon6.5.3/expressions.html
+            # visit that link for more info on xpath or the expressions will seem foreign, surrender monkey
             parser = html.fromstring(response.text)
             p_list = parser.xpath('//li[contains(@class,"lvresult")]')
+            # I could've used a metaclass here to define this whole area of parsing but I can't be arsed
             quant = parser.xpath("//span[@class='rcnt']//text()")
+            # results = format quant.strip()
             results = ''.join(quant).strip()
+            # Print found x results for {1} , {1} being the input variable from prompt
             print("Found {0} results for {1}".format(results, item))
             scraped_quant = []
-
+            # I had to sign up on eBay's developer list to access their API variable names: "vip"
+            # essentially href is an attribute of an html anchor tag (anchor tags identify sections of documents)
+            # name with @class="vip" is their API variable for item name
+            # price is self explanatory
+            # the second declaration of them is for the CSV
             for products in p_list:
                 raw_url = products.xpath('.//a[@class="vip"]/@href')
                 raw_name = products.xpath('.//a[@class="vip"]/text()')
