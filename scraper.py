@@ -8,6 +8,7 @@ import urllib3
 
 
 def parse():
+    # Disable warnings from urllib about Insecure Requests bcuz fuck that bullshit
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     # from 12 to 14 I'm creating a search URL that will be input to LXML
     searchurl = "http://www.ebay.com/sch/"
